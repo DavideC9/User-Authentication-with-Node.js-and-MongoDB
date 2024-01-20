@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  # MongoDB services
+  mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db 
+
+  # Node API services
+  api:
+    build: .
+    ports:
+      - "4000:3000"
+    environment:
+      PORT: 3030
+      MONGODB_URI: "mongodb+srv://<inserisciDB>"
+      DB_NAME: "NomeDB"
+
+volumes:
+  mongo_db: {}
